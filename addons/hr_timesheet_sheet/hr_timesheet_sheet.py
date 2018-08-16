@@ -626,7 +626,7 @@ class hr_timesheet_sheet_sheet_day(osv.osv):
                                 LEFT JOIN res_partner p
                                 ON u.partner_id = p.id
                             WHERE action in ('sign_in', 'sign_out')
-                            group by (a.name AT TIME ZONE 'UTC' AT TIME ZONE coalesce(p.tz, 'UTC'))::date, s.id, timezone
+                            group by p.tz, (a.name AT TIME ZONE 'UTC' AT TIME ZONE coalesce(p.tz, 'UTC'))::date, s.id, timezone
                         )) AS foo
                         GROUP BY name, sheet_id, timezone
                 )) AS bar""")
